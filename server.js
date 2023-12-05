@@ -5,8 +5,6 @@ const server =http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-console.log(app)
-
 io.on("connection", (socket) => {
   console.log("a user connected");
   socket.on("chat message", (msg) => {
