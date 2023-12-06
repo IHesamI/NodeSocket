@@ -1,20 +1,20 @@
 let jwt = require('jsonwebtoken');
 
-class AuthHandler{
-    
-    constructor(){
-        console.error(process.env.SECRET_KEY);
-        this.key=process.env.SECRET_KEY
+function AuthHandler(){
+    const key=process.env.SECRET_KEY;
+    function login(req,res){
+        let body = req.body;
+        let token=jwt.sign(body,key);
+
+        res.send({'jwt':token,'status':'200'})
     }
-    //TODO
-    // 
-    login(req,res){
-        console.error(this?.key);
-        console.error('req',req.body);
+
+    return{
+        login,
     }
 
 }
 
-const loginHandler = new AuthHandler()
+const loginHandler = AuthHandler()
 
 module.exports = loginHandler
