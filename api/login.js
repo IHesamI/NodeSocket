@@ -1,5 +1,6 @@
 let jwt = require('jsonwebtoken');
-
+const ormHandler= require('../dataBaseHandler/orm');
+const db=new ormHandler();
 function AuthHandler(){
     const key=process.env.SECRET_KEY;
     function login(req,res){
