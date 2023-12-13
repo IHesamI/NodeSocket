@@ -13,7 +13,46 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   email String @unique
+  profile profile?
   name String
   userName String?
   password String?
+  messages message[]
+  chats chat[]
+}
+
+model chat {
+  id Int @id @default(autoincrement())
+  // participant1 User @relation(fields:[participant1Id],references: [id])
+  // participant1Id Int
+  // participant2 User @relation(fields:[participant2Id],references: [id])
+  // participant2Id Int
+    participant User[]
+    messages message[]
+}
+
+model profile{
+  userprof User @relation(fields: [userId],references: [id])
+  userId Int @unique
+  images media[]
+  name String
+  userName String @unique
+}
+model message {
+  id Int @id @default(autoincrement())
+  author User @relation(fields: [authorId],references: [id])
+  authorId Int
+  chat chat @relation(fields:[chatId],references: [id])
+  chatId Int
+  medias media[]
+  text String
+}
+
+model media {
+  id Int @id @default(autoincrement())
+  message message @relation(fields: [messageId],references: [id])
+  messageId Int
+  profile profile @relation(fields: [profileId],references: [userId])
+  profileId Int
+  bytes Bytes[]
 }
