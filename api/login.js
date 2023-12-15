@@ -5,6 +5,7 @@ const db=new ormHandler();
 function AuthHandler(){
     const orm=new ormHandler();
     const key=process.env.SECRET_KEY;
+
     async function login(req,res){
         let body = req.body;
         const userToken=body?.token
@@ -18,6 +19,9 @@ function AuthHandler(){
         }
     }
 
+    function register(req,res){
+
+    }
     return{
         login,
     }
