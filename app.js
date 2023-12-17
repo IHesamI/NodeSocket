@@ -1,17 +1,19 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
-const cors=require('cors');
+const cors = require("cors");
 const app = express();
-const login=require('./api/login');
+const authHandler = require("./api/login");
 const { Server } = require("socket.io");
 
 app.use(cors());
-app.use(express.json())  
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  console.error('hello');
+  // console.error('hello');
 });
 
-app.post('/login',login.login);
+app.post("/login", authHandler.login);
+
+app.post("/register", authHandler.register);
 
 module.exports = app;
